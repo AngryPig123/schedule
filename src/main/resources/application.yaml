@@ -1,1 +1,5 @@
-spring.application.name=schedule
+spring:
+  application:
+    name: schedule
+  config:
+    import: optional:file:.env[.properties]
