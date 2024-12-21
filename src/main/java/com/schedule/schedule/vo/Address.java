@@ -1,6 +1,7 @@
 package com.schedule.schedule.vo;
 
 import lombok.*;
+import org.apache.ibatis.type.Alias;
 
 import static com.schedule.schedule.validator.vo.VOValidator.validateAddress;
 
@@ -15,18 +16,20 @@ import static com.schedule.schedule.validator.vo.VOValidator.validateAddress;
  * -----------------------------------------------------------
  * 24. 12. 22.        AngryPig123       최초 생성
  */
+@Alias("Address")
 @Getter
+@ToString
 @EqualsAndHashCode
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Address {
 
-    private final boolean doroAddress;
-    private final boolean jiBunAddress;
+    private final String doroAddress;
+    private final String jiBunAddress;
     private final String zipCode;
     private final String address;
     private final String addressDetail;
 
-    public static Address from(boolean doroAddress, boolean jiBunAddress, String zipCode, String address, String addressDetail) {
+    public static Address from(String doroAddress, String jiBunAddress, String zipCode, String address, String addressDetail) {
         Address vo = new Address(doroAddress, jiBunAddress, zipCode, address, addressDetail);
         validateAddress(vo);
         return vo;

@@ -29,7 +29,6 @@ public class ScheduleApplication {
                 "server host = %s".formatted(SERVER_HOST),
                 "server properties end"
         );
-
     }
 
 }

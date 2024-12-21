@@ -4,6 +4,8 @@ import com.schedule.schedule.constants.PasswordEncryptType;
 import com.schedule.schedule.util.TwoWayPasswordEncoder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.ToString;
+import org.apache.ibatis.type.Alias;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static com.schedule.schedule.util.CommonUtil.getPasswordEncoder;
@@ -19,7 +21,9 @@ import static com.schedule.schedule.util.CommonUtil.getPasswordEncoder;
  * -----------------------------------------------------------
  * 24. 12. 22.        AngryPig123       최초 생성
  */
+@Alias("Password")
 @Getter
+@ToString
 @EqualsAndHashCode
 public class Password {
 

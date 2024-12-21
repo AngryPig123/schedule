@@ -7,6 +7,11 @@ spring:
   profiles:
     active: local
 
+mybatis:
+  mapper-locations: /mybatis/mappers/*.xml
+  type-aliases-package: com.schedule
+
+
 ---
 spring:
   sql:
@@ -34,6 +39,3 @@ server:
 
 secret:
   aes-key: ${LOCAL_SECRET_KEY:my-secret-keyek-terces-ym}
-
-mybatis:
-  config-location: classpath:mybatis/mybatis-config.xml
