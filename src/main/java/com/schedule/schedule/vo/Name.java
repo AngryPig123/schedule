@@ -1,43 +1,41 @@
 package com.schedule.schedule.vo;
 
 import com.schedule.schedule.exception.vo.ValueObjectException;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
+import lombok.*;
 
+import static com.schedule.schedule.constants.VOCodeConstants.NAME_VO_ERROR_CODE;
 import static com.schedule.schedule.constants.VOCodeConstants.PHONE_VO_ERROR_CODE;
+import static com.schedule.schedule.validator.vo.VOValidator.isValidNameRegex;
 import static com.schedule.schedule.validator.vo.VOValidator.isValidPhoneRegex;
 
 /**
  * packageName    : com.schedule.schedule.vo
- * fileName       : Phone
+ * fileName       : Name
  * author         : AngryPig123
- * date           : 24. 12. 18.
+ * date           : 24. 12. 21.
  * description    :
  * ===========================================================
  * DATE              AUTHOR             NOTE
  * -----------------------------------------------------------
- * 24. 12. 18.        AngryPig123       최초 생성
+ * 24. 12. 21.        AngryPig123       최초 생성
  */
 @Getter
 @EqualsAndHashCode
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class Phone {
+public class Name {
 
     private final String first;
-    private final String middle;
     private final String last;
 
-    public static Phone from(String first, String middle, String last) {
-        Phone phone = new Phone(first, middle, last);
-        boolean valid = isValidPhoneRegex(phone);
-        if (!valid) throw ValueObjectException.of(PHONE_VO_ERROR_CODE);
-        return phone;
+    public static Name from(String first, String last) {
+        Name name = new Name(first, last);
+        boolean valid = isValidNameRegex(name);
+        if (!valid) throw ValueObjectException.of(NAME_VO_ERROR_CODE);
+        return name;
     }
 
-    public String fullNumber() {
-        return String.format("%s-%s-%s", this.first, this.middle, this.last);
+    public String fullName() {
+        return String.format("%s%s", this.first, this.last);
     }
 
 }

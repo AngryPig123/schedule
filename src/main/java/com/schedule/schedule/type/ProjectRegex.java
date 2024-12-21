@@ -17,7 +17,8 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum ProjectRegex {
-    PHONE("^010-[0-9]{4}-[0-9]{4}$","010-xxxx-xxxx");
+    PHONE("^010-[0-9]{4}-[0-9]{4}$", "010-xxxx-xxxx"),
+    NAME("^[가-힣]{2,6}$", "짱구, 브루스윌리스");
     private final String pattern;
     private final String expression;
 }

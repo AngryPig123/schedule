@@ -1,17 +1,18 @@
 package com.schedule.schedule.util;
 
+import com.schedule.schedule.constants.PasswordEncryptType;
 import com.schedule.schedule.type.ProjectLocalDateTimeFormat;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.logging.LogLevel;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDateTime;
 
 import static com.schedule.schedule.util.DateUtil.format;
 import static com.schedule.schedule.util.DateUtil.parse;
-import static com.schedule.schedule.util.EncryptionUtil.defaultAesDecrypt;
-import static com.schedule.schedule.util.EncryptionUtil.defaultAesEncrypt;
 import static com.schedule.schedule.util.LoggingUtil.defaultLogging;
 import static com.schedule.schedule.util.ObjectUtil.defaultCopyObject;
+import static com.schedule.schedule.util.PasswordEncoderFactory.findPasswordEncoderByPasswordEncryptType;
 
 
 /**
@@ -44,28 +45,8 @@ public class CommonUtil {
         defaultCopyObject(resource, target);
     }
 
-    public static String encrypt(String data) {
-        try {
-            return defaultAesEncrypt(data);
-        } catch (Exception exception) {
-            logging(
-                    LogLevel.ERROR,
-                    "encrypt exception : %s".formatted(exception.getMessage())
-            );
-            return "";
-        }
-    }
-
-    public static String decrypt(String encryptedData) {
-        try {
-            return defaultAesDecrypt(encryptedData);
-        } catch (Exception exception) {
-            logging(
-                    LogLevel.ERROR,
-                    "decrypt exception : %s".formatted(exception.getMessage())
-            );
-            return "";
-        }
+    public static PasswordEncoder getPasswordEncoder(PasswordEncryptType passwordEncryptType) {
+        return findPasswordEncoderByPasswordEncryptType(passwordEncryptType);
     }
 
 }
