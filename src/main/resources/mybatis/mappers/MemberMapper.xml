@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.schedule.schedule.repository.MemberMapper">
+
+    <resultMap id="MemberResultMap" type="Member">
+
+        <result property="id" column="ID"/>
+        <result property="createId" column="CREATE_ID"/>
+        <result property="createDate" column="CREATE_DATE"/>
+        <result property="modifyId" column="MODIFY_ID"/>
+        <result property="modifyDate" column="MODIFY_DATE"/>
+
+        <association property="loginId" javaType="LoginId">
+            <result property="id" column="LOGIN_ID"/>
+        </association>
+
+        <association property="password" javaType="Password">
+            <result property="password" column="PASSWORD"/>
+        </association>
+
+        <association property="name" javaType="Name">
+            <result property="firstName" column="FIRST_NAME"/>
+            <result property="lastName" column="LAST_NAME"/>
+        </association>
+
+        <association property="homeAddress" javaType="Address">
+            <result property="zipCode" column="HOME_ZIP_NO"/>
+            <result property="address" column="HOME_ADDRESS"/>
+            <result property="addressDetail" column="HOME_ADDRESS_DETAIL"/>
+        </association>
+
+        <association property="cellPhone" javaType="Phone">
+            <result property="firstNumber" column="CELL_FIRST_NUMBER"/>
+            <result property="middleNumber" column="CELL_MIDDLE_NUMBER"/>
+            <result property="lastNumber" column="CELL_LAST_NUMBER"/>
+        </association>
+
+    </resultMap>
+
+    <select id="findMemberByLoginId" resultMap="MemberResultMap">
+        SELECT ID
+             , LOGIN_ID
+             , PASSWORD
+             , FIRST_NAME
+             , LAST_NAME
+             , HOME_ZIP_NO
+             , HOME_ADDRESS
+             , HOME_ADDRESS_DETAIL
+             , CELL_FIRST_NUMBER
+             , CELL_MIDDLE_NUMBER
+             , CELL_LAST_NUMBER
+             , CREATE_ID
+             , CREATE_DATE
+             , MODIFY_ID
+             , MODIFY_DATE
+        FROM MEMBER
+        WHERE LOGIN_ID = #{loginId.id}
+    </select>
+
+    <insert id="insertMember" parameterType="Member">
+        INSERT INTO MEMBER( LOGIN_ID
+                          , PASSWORD
+                          , FIRST_NAME
+                          , LAST_NAME
+                          , HOME_ZIP_NO
+                          , HOME_ADDRESS
+                          , HOME_ADDRESS_DETAIL
+                          , CELL_FIRST_NUMBER
+                          , CELL_MIDDLE_NUMBER
+                          , CELL_LAST_NUMBER
+                          , CREATE_ID
+                          , CREATE_DATE
+                          , MODIFY_ID
+                          , MODIFY_DATE)
+        VALUES ( #{member.loginId.id}
+               , #{member.password.password}
+               , #{member.name.firstName}
+               , #{member.name.lastName}
+               , #{member.homeAddress.zipCode}
+               , #{member.homeAddress.address}
+               , #{member.homeAddress.addressDetail}
+               , #{member.cellPhone.firstNumber}
+               , #{member.cellPhone.middleNumber}
+               , #{member.cellPhone.lastNumber}
+               , #{member.createId}
+               , #{member.createDate}
+               , #{member.modifyId}
+               , now())
+    </insert>
+
+</mapper>
