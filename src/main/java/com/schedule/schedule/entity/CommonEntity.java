@@ -1,6 +1,9 @@
 package com.schedule.schedule.entity;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
@@ -16,15 +19,12 @@ import java.time.LocalDateTime;
  * 24. 12. 22.        AngryPig123       최초 생성
  */
 @Getter
+@Setter
 public abstract class CommonEntity {
 
-    protected String createId;
-    protected LocalDateTime createDate;
-    protected String modifyId;
-    protected LocalDateTime modifyDate;
-
-    protected CommonEntity() {
-        this.createDate = LocalDateTime.now();
-    }
+    protected Long createdBy;
+    protected LocalDateTime createAt;
+    protected Long lastModifiedBy;
+    protected LocalDateTime lastModifiedAt;
 
 }

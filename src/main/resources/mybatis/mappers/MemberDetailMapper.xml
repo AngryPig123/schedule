@@ -12,10 +12,10 @@
         <result property="profileImagePath" column="PROFILE_IMAGE_PATH"/>
         <result property="socialMediaLink" column="SOCIAL_MEDIA_LINK"/>
         <result property="memberBio" column="MEMBER_BIO"/>
-        <result property="createId" column="CREATE_ID"/>
-        <result property="createDate" column="CREATE_DATE"/>
-        <result property="modifyId" column="MODIFY_ID"/>
-        <result property="modifyDate" column="MODIFY_DATE"/>
+        <result property="createdBy" column="CREATED_BY"/>
+        <result property="createAt" column="CREATE_AT"/>
+        <result property="lastModifiedBy" column="LAST_MODIFIED_BY"/>
+        <result property="lastModifiedAt" column="LAST_MODIFIED_AT"/>
 
         <association property="myDateOfBirth" javaType="MyDate">
             <result property="date" column="DATE_OF_BIRTH"/>
@@ -32,10 +32,10 @@
                                  , PROFILE_IMAGE_PATH
                                  , SOCIAL_MEDIA_LINK
                                  , MEMBER_BIO
-                                 , CREATE_ID
-                                 , CREATE_DATE
-                                 , MODIFY_ID
-                                 , MODIFY_DATE)
+                                 , CREATED_BY
+                                 , CREATE_AT
+                                 , LAST_MODIFIED_BY
+                                 , LAST_MODIFIED_AT)
         VALUES ( #{memberId}
                , #{gender}
                , #{myDateOfBirth.date}
@@ -44,13 +44,13 @@
                , #{profileImagePath}
                , #{socialMediaLink}
                , #{memberBio}
-               , #{createId}
+               , #{createdBy}
                , now()
-               , #{modifyId}
+               , #{lastModifiedBy}
                , now())
     </insert>
 
-    <select id="findMemberDetailByMemberId" resultMap="MemberDetailResultMap">
+    <select id="findMemberDetailByMemberId" parameterType="long" resultMap="MemberDetailResultMap">
         SELECT MEMBER_ID
              , GENDER
              , DATE_OF_BIRTH
@@ -59,10 +59,10 @@
              , PROFILE_IMAGE_PATH
              , SOCIAL_MEDIA_LINK
              , MEMBER_BIO
-             , CREATE_ID
-             , CREATE_DATE
-             , MODIFY_ID
-             , MODIFY_DATE
+             , CREATED_BY
+             , CREATE_AT
+             , LAST_MODIFIED_BY
+             , LAST_MODIFIED_AT
         FROM MEMBER_DETAIL
         WHERE MEMBER_ID = #{memberId}
     </select>

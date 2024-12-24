@@ -1,9 +1,8 @@
-package com.schedule.schedule.security;
+package com.schedule.schedule.config.security;
 
 import com.schedule.schedule.entity.Member;
-import lombok.AccessLevel;
+import com.schedule.schedule.entity.MemberDetail;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -23,19 +22,21 @@ import java.util.List;
  * -----------------------------------------------------------
  * 24. 12. 22.        AngryPig123       최초 생성
  */
-@Getter
 @ToString
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class MemberDetails implements UserDetails {
 
-    private Member member;
+    private final Member member;
 
-    private MemberDetails(Member member) {
+    @Getter
+    private final MemberDetail memberDetail;
+
+    private MemberDetails(Member member, MemberDetail memberDetail) {
+        this.memberDetail = memberDetail;
         this.member = member;
     }
 
-    public static MemberDetails init(Member member) {
-        return new MemberDetails(member);
+    public static MemberDetails init(Member member, MemberDetail memberDetail) {
+        return new MemberDetails(member, memberDetail);
     }
 
     @Override
@@ -51,6 +52,10 @@ public class MemberDetails implements UserDetails {
     @Override
     public String getUsername() {
         return member.getName().fullName();
+    }
+
+    public Long getMemberId() {
+        return this.member.getMemberId();
     }
 
     private SimpleGrantedAuthority admin() {

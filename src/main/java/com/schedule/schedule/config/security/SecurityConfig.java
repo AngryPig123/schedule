@@ -1,4 +1,4 @@
-package com.schedule.schedule.security;
+package com.schedule.schedule.config.security;
 
 import com.schedule.schedule.constants.PasswordEncryptType;
 import com.schedule.schedule.filter.MDCLoggingFilter;
