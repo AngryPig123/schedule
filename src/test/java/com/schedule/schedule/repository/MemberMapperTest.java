@@ -19,7 +19,6 @@ import java.util.Optional;
 
 import static com.schedule.schedule.constants.CommonConstants.FALSE_STRING;
 import static com.schedule.schedule.constants.CommonConstants.TRUE_STRING;
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * packageName    : com.schedule.schedule.repository

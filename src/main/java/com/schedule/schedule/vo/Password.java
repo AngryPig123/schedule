@@ -52,7 +52,7 @@ public class Password {
     }
 
     public static Password from(String password, int lockCount) {
-        Password vo =new Password(password, lockCount);
+        Password vo = new Password(password, lockCount);
         validPassword(vo);
         return vo;
     }
