@@ -3,6 +3,7 @@ package com.schedule.schedule.vo;
 import lombok.*;
 import org.apache.ibatis.type.Alias;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
@@ -34,10 +35,10 @@ public class MyDate {
         return new MyDate(date);
     }
 
-    public java.time.LocalDate toLocalDate() {
+    public LocalDate toLocalDate() {
         for (DateTimeFormatter formatter : DATE_TIM_FORMATTERS) {
             try {
-                return java.time.LocalDate.parse(this.date, formatter);
+                return LocalDate.parse(this.date, formatter);
             } catch (DateTimeParseException ignored) {
 
             }
