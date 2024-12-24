@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <logger name="jdbc" level="OFF"/>
+    <logger name="jdbc.sqlonly" level="OFF"/>
+    <logger name="jdbc.sqltiming" level="info"/>
+    <logger name="jdbc.resultsettable" level="info"/>
+    <logger name="jdbc.audit" level="OFF"/>
+    <logger name="jdbc.resultset" level="OFF"/>
+    <logger name="jdbc.connection" level="OFF"/>
+
+<!--    <property resource="log/log.properties"/>-->
+
+    <timestamp key="bySecond" datePattern="yyyyMMdd'T'HHmmss" timeReference="contextBirth"/>
+    <timestamp key="byDay" datePattern="yyyy-MM-dd"/>
+    <timestamp key="byYear" datePattern="yyyy"/>
+    <timestamp key="byMonth" datePattern="MM"/>
+    <timestamp key="byDate" datePattern="dd"/>
+    <timestamp key="byTime" datePattern="HH"/>
+    <timestamp key="byMin" datePattern="mm"/>
+    <timestamp key="bySec" datePattern="ss"/>
+
+    <property name="PROJECT_NAME" value="${log.project.name}"/>
+<!--    <property name="LOGS_PATH" value="${log.file.path}/${PROJECT_NAME}/${byDay}"/>-->
+
+    <property name="CONSOLE_PATTERN"
+              value="%green(%d{yyyy-MM-dd HH:mm:ss}) %boldWhite([ %thread ]) %green([traceId : %X{requestId}]) %boldCyan([ %-5level]) %boldWhite([%logger{36}]) - %msg%n"/>
+
+    <!--
+        <property name="FILE_PATTERN"
+                  value="%d{yyyy-MM-dd HH:mm:ss} [ %thread ] [traceId : %X{traceId}] [%-5level{5} ] [%logger{36}] - %msg%n"/>
+    -->
+
+    <appender name="CONSOLE_INFO" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>${CONSOLE_PATTERN}</Pattern>
+        </layout>
+    </appender>
+
+    <!--
+        <appender name="FILE_ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>${LOGS_PATH}/info.log</file>
+
+            <filter class="ch.qos.logback.classic.filter.LevelFilter">
+                <level>error</level>
+                <onMatch>ACCEPT</onMatch>
+                <onMismatch>DENY</onMismatch>
+            </filter>
+
+            <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+                <pattern>${FILE_PATTERN}</pattern>
+                <charset>UTF-8</charset>
+            </encoder>
+
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+
+                <fileNamePattern>${LOGS_PATH}/%d{yyyy-MM-dd}_%i.log</fileNamePattern>
+                <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                    <maxFileSize>10MB</maxFileSize>
+                </timeBasedFileNamingAndTriggeringPolicy>
+                <maxHistory>60</maxHistory>
+            </rollingPolicy>
+        </appender>
+    -->
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE_INFO"/>
+        <!--        <appender-ref ref="FILE_ERROR"/>-->
+    </root>
+
+</configuration>
