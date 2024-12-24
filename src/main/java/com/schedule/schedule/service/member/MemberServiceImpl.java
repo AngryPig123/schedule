@@ -2,7 +2,7 @@ package com.schedule.schedule.service.member;
 
 import com.schedule.schedule.dto.member.MemberInsertRequest;
 import com.schedule.schedule.entity.Member;
-import com.schedule.schedule.exception.vo.ValueObjectException;
+import com.schedule.schedule.repository.MemberDetailMapper;
 import com.schedule.schedule.repository.MemberMapper;
 import com.schedule.schedule.vo.Password;
 import lombok.RequiredArgsConstructor;
@@ -32,13 +32,14 @@ import static com.schedule.schedule.validator.vo.VOValidator.validPassword;
 public class MemberServiceImpl implements MemberService {
 
     private final MemberMapper memberMapper;
+    private final MemberDetailMapper memberDetailMapper;
 
     @Override
     public Member insertMember(MemberInsertRequest memberInsertRequest) {
         this.insertMemberRequestValid(memberInsertRequest);
         Member memberEntity = memberInsertRequest.toEntity();
         memberEntity.valid();
-        boolean exists = memberMapper.findMemberByLoginId(memberEntity.getLoginId()).isPresent();
+        boolean exists = memberMapper.findMemberByMemberLoginId(memberEntity.getMemberLoginId()).isPresent();
         if (exists) throw new RuntimeException("이미 존재하는 계정입니다.");
         int result = memberMapper.insertMember(memberEntity);
         if (result < 1) throw new RuntimeException("계정 생성중 에러가 발생하였습니다.");

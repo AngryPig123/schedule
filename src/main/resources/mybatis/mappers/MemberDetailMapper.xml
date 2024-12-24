@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.schedule.schedule.repository.MemberDetailMapper">
+
+    <resultMap id="MemberDetailResultMap" type="MemberDetail">
+
+        <result property="memberId" column="MEMBER_ID"/>
+        <result property="gender" column="GENDER"/>
+        <result property="occupation" column="OCCUPATION"/>
+        <result property="companyName" column="COMPANY_NAME"/>
+        <result property="profileImagePath" column="PROFILE_IMAGE_PATH"/>
+        <result property="socialMediaLink" column="SOCIAL_MEDIA_LINK"/>
+        <result property="memberBio" column="MEMBER_BIO"/>
+        <result property="createId" column="CREATE_ID"/>
+        <result property="createDate" column="CREATE_DATE"/>
+        <result property="modifyId" column="MODIFY_ID"/>
+        <result property="modifyDate" column="MODIFY_DATE"/>
+
+        <association property="myDateOfBirth" javaType="MyDate">
+            <result property="date" column="DATE_OF_BIRTH"/>
+        </association>
+
+    </resultMap>
+
+    <insert id="insertMemberDetail" parameterType="MemberDetail">
+        INSERT INTO MEMBER_DETAIL( MEMBER_ID
+                                 , GENDER
+                                 , DATE_OF_BIRTH
+                                 , OCCUPATION
+                                 , COMPANY_NAME
+                                 , PROFILE_IMAGE_PATH
+                                 , SOCIAL_MEDIA_LINK
+                                 , MEMBER_BIO
+                                 , CREATE_ID
+                                 , CREATE_DATE
+                                 , MODIFY_ID
+                                 , MODIFY_DATE)
+        VALUES ( #{memberId}
+               , #{gender}
+               , #{myDateOfBirth.date}
+               , #{occupation}
+               , #{companyName}
+               , #{profileImagePath}
+               , #{socialMediaLink}
+               , #{memberBio}
+               , #{createId}
+               , now()
+               , #{modifyId}
+               , now())
+    </insert>
+
+    <select id="findMemberDetailByMemberId" resultMap="MemberDetailResultMap">
+        SELECT MEMBER_ID
+             , GENDER
+             , DATE_OF_BIRTH
+             , OCCUPATION
+             , COMPANY_NAME
+             , PROFILE_IMAGE_PATH
+             , SOCIAL_MEDIA_LINK
+             , MEMBER_BIO
+             , CREATE_ID
+             , CREATE_DATE
+             , MODIFY_ID
+             , MODIFY_DATE
+        FROM MEMBER_DETAIL
+        WHERE MEMBER_ID = #{memberId}
+    </select>
+
+</mapper>

@@ -1,8 +1,7 @@
 package com.schedule.schedule.service.member;
 
 import com.schedule.schedule.dto.member.MemberInsertRequest;
-import com.schedule.schedule.entity.Member;
-import com.schedule.schedule.entity.id.LoginId;
+import com.schedule.schedule.entity.id.MemberLoginId;
 import com.schedule.schedule.vo.Address;
 import com.schedule.schedule.vo.Name;
 import com.schedule.schedule.vo.Password;
@@ -35,13 +34,13 @@ class MemberServiceImplTest {
 
     @Test
     void insert() {
-        LoginId loginId = LoginId.of("insertTest");
+        MemberLoginId memberLoginId = MemberLoginId.of("insertTest");
         Password password = Password.of("1q2w3e4r!");
         Password passwordCheck = Password.of("1q2w3e4r!");
         Name name = Name.from("홍", "길동");
         Address homeAddress = Address.from(TRUE_STRING, FALSE_STRING, "142-107", "서울시 강북구 인수봉로 142-12", "2층");
         Phone cellPhone = Phone.from("010", "0000", "0000");
-        MemberInsertRequest insertRequest = MemberInsertRequest.from(loginId, password, passwordCheck, name, homeAddress, cellPhone);
+        MemberInsertRequest insertRequest = MemberInsertRequest.from(memberLoginId, password, passwordCheck, name, homeAddress, cellPhone);
         memberService.insertMember(insertRequest);
     }
 

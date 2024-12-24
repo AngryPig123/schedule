@@ -1,7 +1,7 @@
 package com.schedule.schedule.security;
 
 import com.schedule.schedule.entity.Member;
-import com.schedule.schedule.entity.id.LoginId;
+import com.schedule.schedule.entity.id.MemberLoginId;
 import com.schedule.schedule.repository.MemberMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,8 +32,8 @@ public class MemberDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        LoginId loginId = LoginId.of(username);
-        Optional<Member> findMember = memberMapper.findMemberByLoginId(loginId);
+        MemberLoginId memberLoginId = MemberLoginId.of(username);
+        Optional<Member> findMember = memberMapper.findMemberByMemberLoginId(memberLoginId);
         Member member = findMember.orElseThrow(() -> new BadCredentialsException(
                 "계정을 찾을 수 없습니다."
         ));

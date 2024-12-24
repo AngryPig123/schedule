@@ -40,7 +40,7 @@ public class MemberDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(member());
+        return List.of(admin(), member(), guest(), anonymous());
     }
 
     @Override
@@ -51,6 +51,10 @@ public class MemberDetails implements UserDetails {
     @Override
     public String getUsername() {
         return member.getName().fullName();
+    }
+
+    private SimpleGrantedAuthority admin() {
+        return new SimpleGrantedAuthority("ROLE_ADMIN");
     }
 
     private SimpleGrantedAuthority member() {

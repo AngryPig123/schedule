@@ -1,6 +1,7 @@
 package com.schedule.schedule.repository;
 
 import com.schedule.schedule.entity.Member;
+import com.schedule.schedule.entity.MemberDetail;
 import com.schedule.schedule.entity.id.MemberLoginId;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -9,20 +10,20 @@ import java.util.Optional;
 
 /**
  * packageName    : com.schedule.schedule.repository
- * fileName       : MemberMapper
+ * fileName       : MemberDetailMapper
  * author         : AngryPig123
- * date           : 24. 12. 22.
+ * date           : 24. 12. 24.
  * description    :
  * ===========================================================
  * DATE              AUTHOR             NOTE
  * -----------------------------------------------------------
- * 24. 12. 22.        AngryPig123       최초 생성
+ * 24. 12. 24.        AngryPig123       최초 생성
  */
 @Mapper
-public interface MemberMapper {
+public interface MemberDetailMapper {
 
-    int insertMember(@Param("member") Member member);
+    int insertMemberDetail(@Param("memberDetail") MemberDetail memberDetail);
 
-    Optional<Member> findMemberByMemberLoginId(@Param("memberLoginId") MemberLoginId memberLoginId);
+    Optional<MemberDetail> findMemberDetailByMemberId(@Param("memberId") String memberId);
 
 }

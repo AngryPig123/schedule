@@ -14,18 +14,18 @@ import org.apache.ibatis.type.Alias;
  * -----------------------------------------------------------
  * 24. 12. 22.        AngryPig123       최초 생성
  */
-@Alias("LoginId")
+@Alias("MemberLoginId")
 @Getter
 @ToString
 @EqualsAndHashCode
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class LoginId {
+public class MemberLoginId {
 
     private String id;
 
-    public static LoginId of(String id) {
-        return new LoginId(id);
+    public static MemberLoginId of(String id) {
+        return new MemberLoginId(id);
     }
 
 }
