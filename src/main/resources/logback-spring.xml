@@ -24,7 +24,7 @@
 <!--    <property name="LOGS_PATH" value="${log.file.path}/${PROJECT_NAME}/${byDay}"/>-->
 
     <property name="CONSOLE_PATTERN"
-              value="%green(%d{yyyy-MM-dd HH:mm:ss}) %boldWhite([ %thread ]) %green([traceId : %X{traceId}]) %boldCyan([ %-5level]) %boldWhite([%logger{36}]) - %msg%n"/>
+              value="%green(%d{yyyy-MM-dd HH:mm:ss}) %boldWhite([ %thread ]) %green([traceId : %X{requestId}]) %boldCyan([ %-5level]) %boldWhite([%logger{36}]) - %msg%n"/>
 
     <!--
         <property name="FILE_PATTERN"

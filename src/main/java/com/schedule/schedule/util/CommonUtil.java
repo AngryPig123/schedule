@@ -7,6 +7,8 @@ import org.springframework.boot.logging.LogLevel;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import static com.schedule.schedule.util.DateUtil.format;
 import static com.schedule.schedule.util.DateUtil.parse;
@@ -44,6 +46,11 @@ public class CommonUtil {
     public static void copyObject(Object resource, Object target) {
         defaultCopyObject(resource, target);
     }
+
+    public static final List<DateTimeFormatter> DATE_TIM_FORMATTERS = List.of(
+            DateTimeFormatter.ofPattern("yyyyMMdd"),
+            DateTimeFormatter.ofPattern("yyyy-MM-dd")
+    );
 
     public static PasswordEncoder getPasswordEncoder(PasswordEncryptType passwordEncryptType) {
         return findPasswordEncoderByPasswordEncryptType(passwordEncryptType);

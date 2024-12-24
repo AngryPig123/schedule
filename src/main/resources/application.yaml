@@ -6,11 +6,9 @@ spring:
       - optional:file:.env[.properties]
   profiles:
     active: local
-
 mybatis:
   mapper-locations: /mybatis/mappers/*.xml
   type-aliases-package: com.schedule
-
 
 ---
 spring:
@@ -31,11 +29,21 @@ spring:
     clean-disabled: true
     locations: classpath:db/migration
     url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=POSTGRESQL;DATABASE_TO_LOWER=TRUE;CASE_INSENSITIVE_IDENTIFIERS=TRUE
+    loggers: slf4j
   h2:
     console:
       enabled: true
+  security:
+    user:
+      name: user
+      password: 1q2w3e4r!
+
 server:
   port: ${LOCAL_HOST:8080}
 
 secret:
   aes-key: ${LOCAL_SECRET_KEY:my-secret-keyek-terces-ym}
+
+logging:
+  level:
+    org.flywaydb: DEBUG

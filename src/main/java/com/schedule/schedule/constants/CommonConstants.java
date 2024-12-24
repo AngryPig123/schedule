@@ -14,4 +14,5 @@ package com.schedule.schedule.constants;
 public class CommonConstants {
     public static String TRUE_STRING = "Y";
     public static String FALSE_STRING = "N";
+    public static int PASSWORD_LOCK_COUNT = 5;
 }
