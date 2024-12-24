@@ -1,10 +1,8 @@
 package com.schedule.schedule.vo;
 
-import com.schedule.schedule.exception.vo.ValueObjectException;
 import lombok.*;
 import org.apache.ibatis.type.Alias;
 
-import static com.schedule.schedule.constants.VOCodeConstants.PHONE_VO_ERROR_CODE;
 import static com.schedule.schedule.validator.vo.VOValidator.isValidPhoneRegex;
 
 /**
@@ -31,8 +29,7 @@ public class Phone {
 
     public static Phone from(String first, String middle, String last) {
         Phone phone = new Phone(first, middle, last);
-        boolean valid = isValidPhoneRegex(phone);
-        if (!valid) throw ValueObjectException.of(PHONE_VO_ERROR_CODE);
+        isValidPhoneRegex(phone);
         return phone;
     }
 

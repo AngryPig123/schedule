@@ -1,6 +1,7 @@
 package com.schedule.schedule.entity;
 
 import com.schedule.schedule.entity.id.LoginId;
+import com.schedule.schedule.validator.entity.MemberValidator;
 import com.schedule.schedule.vo.Address;
 import com.schedule.schedule.vo.Name;
 import com.schedule.schedule.vo.Password;
@@ -44,8 +45,15 @@ public class Member extends CommonEntity {
     }
 
     public static Member init(LoginId loginId, Password password, Name name, Address homeAddress, Phone cellPhone) {
-        return new Member(loginId, password, name, homeAddress, cellPhone);
+        return new Member(loginId, password.encrypt(), name, homeAddress, cellPhone);
     }
 
+    public void valid() {
+        MemberValidator.validate(this);
+    }
+
+    public void increasePasswordLockCount() {
+        this.password = this.password.increasePasswordLockCount();
+    }
 
 }

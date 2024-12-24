@@ -16,7 +16,9 @@
         </association>
 
         <association property="password" javaType="Password">
+            <result property="encryptType" column="ENCRYPT_TYPE"/>
             <result property="password" column="PASSWORD"/>
+            <result property="lockCount" column="LOCK_COUNT"/>
         </association>
 
         <association property="name" javaType="Name">
@@ -25,6 +27,8 @@
         </association>
 
         <association property="homeAddress" javaType="Address">
+            <result property="doroYn" column="HOME_DORO_YN"/>
+            <result property="jiBunYn" column="HOME_JI_BUN_YN"/>
             <result property="zipCode" column="HOME_ZIP_NO"/>
             <result property="address" column="HOME_ADDRESS"/>
             <result property="addressDetail" column="HOME_ADDRESS_DETAIL"/>
@@ -41,9 +45,13 @@
     <select id="findMemberByLoginId" resultMap="MemberResultMap">
         SELECT ID
              , LOGIN_ID
+             , ENCRYPT_TYPE
              , PASSWORD
+             , LOCK_COUNT
              , FIRST_NAME
              , LAST_NAME
+             , HOME_DORO_YN
+             , HOME_JI_BUN_YN
              , HOME_ZIP_NO
              , HOME_ADDRESS
              , HOME_ADDRESS_DETAIL
@@ -60,9 +68,13 @@
 
     <insert id="insertMember" parameterType="Member">
         INSERT INTO MEMBER( LOGIN_ID
+                          , ENCRYPT_TYPE
                           , PASSWORD
+                          , LOCK_COUNT
                           , FIRST_NAME
                           , LAST_NAME
+                          , HOME_DORO_YN
+                          , HOME_JI_BUN_YN
                           , HOME_ZIP_NO
                           , HOME_ADDRESS
                           , HOME_ADDRESS_DETAIL
@@ -74,9 +86,13 @@
                           , MODIFY_ID
                           , MODIFY_DATE)
         VALUES ( #{member.loginId.id}
+               , #{member.password.encryptType}
                , #{member.password.password}
+               , #{member.password.lockCount}
                , #{member.name.firstName}
                , #{member.name.lastName}
+               , #{member.homeAddress.doroYn}
+               , #{member.homeAddress.jiBunYn}
                , #{member.homeAddress.zipCode}
                , #{member.homeAddress.address}
                , #{member.homeAddress.addressDetail}

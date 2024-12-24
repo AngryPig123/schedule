@@ -3,7 +3,7 @@ package com.schedule.schedule.vo;
 import lombok.*;
 import org.apache.ibatis.type.Alias;
 
-import static com.schedule.schedule.validator.vo.VOValidator.validateAddress;
+import static com.schedule.schedule.validator.vo.VOValidator.validAddress;
 
 /**
  * packageName    : com.schedule.schedule.vo
@@ -23,15 +23,15 @@ import static com.schedule.schedule.validator.vo.VOValidator.validateAddress;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Address {
 
-    private final String doroAddress;
-    private final String jiBunAddress;
+    private final String doroYn;
+    private final String jiBunYn;
     private final String zipCode;
     private final String address;
     private final String addressDetail;
 
     public static Address from(String doroAddress, String jiBunAddress, String zipCode, String address, String addressDetail) {
         Address vo = new Address(doroAddress, jiBunAddress, zipCode, address, addressDetail);
-        validateAddress(vo);
+        validAddress(vo);
         return vo;
     }
 

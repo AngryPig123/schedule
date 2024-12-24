@@ -30,8 +30,7 @@ public class Name {
 
     public static Name from(String first, String last) {
         Name name = new Name(first, last);
-        boolean valid = isValidNameRegex(name);
-        if (!valid) throw ValueObjectException.of(NAME_VO_ERROR_CODE);
+        isValidNameRegex(name);
         return name;
     }
 
