@@ -39,8 +39,9 @@ public class MybatisCommonEntityInterceptor implements Interceptor {
 
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
+        String method = invocation.getMethod().getName();
         Object[] args = invocation.getArgs();
-        commonEntityDateSet(args);
+        if ("update".equals(method)) commonEntityDateSet(args);
         return invocation.proceed();
     }
 
