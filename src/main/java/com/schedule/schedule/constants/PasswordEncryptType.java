@@ -3,6 +3,8 @@ package com.schedule.schedule.constants;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.util.Arrays;
+
 /**
  * packageName    : com.schedule.schedule.constants
  * fileName       : PasswordEncryptType
@@ -17,5 +19,13 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum PasswordEncryptType {
-    BCRYPT, NOOP, SCRYPT, TWO_WAY
+    BCRYPT, NOOP, SCRYPT, TWO_WAY;
+
+    public static PasswordEncryptType lookup(String type) {
+        return Arrays.stream(PasswordEncryptType.values())
+                .filter(code -> code.name().equals(type))
+                .findFirst()
+                .orElse(null);
+    }
+
 }

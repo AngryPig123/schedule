@@ -1,25 +1,32 @@
-CREATE SEQUENCE member_id_seq
-    START WITH 1
+CREATE
+SEQUENCE MEMBER_ID_SEQ
+    START
+WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
-    CACHE 1;
+    CACHE
+1;
 
-CREATE TABLE member
+CREATE TABLE MEMBER
 (
-    id                  INT DEFAULT NEXTVAL('member_id_seq') PRIMARY KEY,
-    login_id            VARCHAR(50)  NOT NULL UNIQUE,
-    password            VARCHAR(200) NOT NULL,
-    first_name          VARCHAR(6)   NOT NULL,
-    last_name           VARCHAR(6)   NOT NULL,
-    home_zip_no         VARCHAR(50),
-    home_address        VARCHAR(50),
-    home_address_detail VARCHAR(50),
-    cell_first_number   VARCHAR(10),
-    cell_middle_number  VARCHAR(10),
-    cell_last_number    VARCHAR(10),
-    create_id           int,
-    create_date         TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    modify_id           int,
-    modify_date         TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    ID                  BIGINT                DEFAULT NEXTVAL('MEMBER_ID_SEQ') PRIMARY KEY,
+    LOGIN_ID            VARCHAR(50)  NOT NULL UNIQUE,
+    ENCRYPT_TYPE        VARCHAR(20)  NOT NULL,
+    PASSWORD            VARCHAR(200) NOT NULL,
+    LOCK_COUNT          INT                   DEFAULT 0,
+    FIRST_NAME          VARCHAR(6)   NOT NULL,
+    LAST_NAME           VARCHAR(6)   NOT NULL,
+    HOME_DORO_YN        VARCHAR(1)   NOT NULL DEFAULT 'Y',
+    HOME_JI_BUN_YN      VARCHAR(1)   NOT NULL DEFAULT 'N',
+    HOME_ZIP_NO         VARCHAR(50),
+    HOME_ADDRESS        VARCHAR(50),
+    HOME_ADDRESS_DETAIL VARCHAR(50),
+    CELL_FIRST_NUMBER   VARCHAR(10),
+    CELL_MIDDLE_NUMBER  VARCHAR(10),
+    CELL_LAST_NUMBER    VARCHAR(10),
+    CREATE_ID           BIGINT, /* todo not null */
+    CREATE_DATE         TIMESTAMP             DEFAULT CURRENT_TIMESTAMP,
+    MODIFY_ID           BIGINT, /* todo not null */
+    MODIFY_DATE         TIMESTAMP             DEFAULT CURRENT_TIMESTAMP
 )

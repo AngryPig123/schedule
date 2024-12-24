@@ -26,7 +26,7 @@ public class PasswordEncoderFactory {
     private static final PasswordEncoder NOOP_ENCODER = NoOpPasswordEncoder.getInstance();
     private static final PasswordEncoder TWO_WAY_PASSWORD_ENCODER = new TwoWayPasswordEncoder();
 
-    static PasswordEncoder findPasswordEncoderByPasswordEncryptType(PasswordEncryptType passwordEncryptType) {
+    public static PasswordEncoder findPasswordEncoderByPasswordEncryptType(PasswordEncryptType passwordEncryptType) {
         return switch (passwordEncryptType) {
             case BCRYPT -> BCRYPT_PASSWORD_ENCODER;
             case SCRYPT -> SCRYPT_PASSWORD_ENCODER;
