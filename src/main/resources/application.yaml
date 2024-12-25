@@ -6,12 +6,14 @@ spring:
       - optional:file:.env[.properties]
   profiles:
     active: local
-mybatis:
-  mapper-locations: /mybatis/mappers/*.xml
-  type-aliases-package: com.schedule
 
 ---
 spring:
+  devtools:
+    restart:
+      enabled: true
+    livereload:
+      enabled: true
   sql:
     init:
       mode: always

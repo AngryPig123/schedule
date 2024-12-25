@@ -21,8 +21,8 @@ import java.util.Optional;
 @Mapper
 public interface MemberMapper {
 
-    int insertMember(@Param("member") Member member);
+    int insertMember(Member member);
 
-    Optional<Member> findMemberByMemberLoginId(@Param("memberLoginId") MemberLoginId memberLoginId);
+    Optional<Member> findMemberByMemberLoginId(MemberLoginId memberLoginId);
 
 }

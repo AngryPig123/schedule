@@ -1,5 +1,6 @@
-package com.schedule.schedule.security;
+package com.schedule.schedule.config.security;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -17,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
  * -----------------------------------------------------------
  * 24. 12. 24.        AngryPig123       최초 생성
  */
+@Slf4j
 public class UsernamePasswordAuthenticationProvider implements AuthenticationProvider {
 
     @Override
@@ -27,6 +29,7 @@ public class UsernamePasswordAuthenticationProvider implements AuthenticationPro
         String password = authentication.getCredentials().toString();
 
         return null;
+
     }
 
 
