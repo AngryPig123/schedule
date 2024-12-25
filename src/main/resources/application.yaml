@@ -9,6 +9,11 @@ spring:
 
 ---
 spring:
+  devtools:
+    restart:
+      enabled: true
+    livereload:
+      enabled: true
   sql:
     init:
       mode: always

@@ -1,6 +1,7 @@
 package com.schedule.schedule.controller.member;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,13 +17,13 @@ import org.springframework.web.bind.annotation.RestController;
  * 24. 12. 24.        AngryPig123       최초 생성
  */
 @Slf4j
-@RestController
+@Controller
 public class MemberController {
 
     @GetMapping
     public String init() {
         log.info("test");
-        return "test";
+        return "index";
     }
 
 }
