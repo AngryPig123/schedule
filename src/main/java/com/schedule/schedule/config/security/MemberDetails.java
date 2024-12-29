@@ -1,5 +1,6 @@
 package com.schedule.schedule.config.security;
 
+import com.schedule.schedule.constants.PasswordEncryptType;
 import com.schedule.schedule.entity.Member;
 import com.schedule.schedule.entity.MemberDetail;
 import lombok.Getter;
@@ -22,12 +23,12 @@ import java.util.List;
  * -----------------------------------------------------------
  * 24. 12. 22.        AngryPig123       최초 생성
  */
+@Getter
 @ToString
 public class MemberDetails implements UserDetails {
 
     private final Member member;
 
-    @Getter
     private final MemberDetail memberDetail;
 
     private MemberDetails(Member member, MemberDetail memberDetail) {
@@ -47,6 +48,10 @@ public class MemberDetails implements UserDetails {
     @Override
     public String getPassword() {
         return member.getPassword().getPassword();
+    }
+
+    public PasswordEncryptType getEncryptType(){
+        return member.getPassword().getEncryptType();
     }
 
     @Override

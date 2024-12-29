@@ -16,24 +16,22 @@ import javax.sql.DataSource;
 public class MyBatisConfig {
 
     @Bean
-    public SqlSessionFactory sqlSessionFactory(DataSource dataSource, org.apache.ibatis.session.Configuration myBatisConfiguration) throws Exception {
+    public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
+
         SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
         sessionFactory.setDataSource(dataSource);
         sessionFactory.setMapperLocations(
                 new PathMatchingResourcePatternResolver().getResources("classpath:/mybatis/mappers/*.xml")
         );
         sessionFactory.setTypeAliasesPackage("com.schedule");
-        sessionFactory.setConfiguration(myBatisConfiguration);
         sessionFactory.setPlugins(new MybatisCommonEntityInterceptor());
-        return sessionFactory.getObject();
-    }
-
-    @Bean
-    public org.apache.ibatis.session.Configuration myBatisConfiguration() {
         org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration();
         configuration.setMapUnderscoreToCamelCase(true);
         configuration.setCacheEnabled(true);
-        return configuration;
+        sessionFactory.setConfiguration(configuration);
+        return sessionFactory.getObject();
+
     }
+
 
 }

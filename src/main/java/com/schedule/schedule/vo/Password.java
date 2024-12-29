@@ -2,9 +2,7 @@ package com.schedule.schedule.vo;
 
 import com.schedule.schedule.constants.PasswordEncryptType;
 import com.schedule.schedule.util.TwoWayPasswordEncoder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 import org.apache.ibatis.type.Alias;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -27,11 +25,12 @@ import static com.schedule.schedule.validator.vo.VOValidator.validPassword;
 @Getter
 @ToString
 @EqualsAndHashCode
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Password {
 
-    private final PasswordEncryptType encryptType;
-    private final String password;
-    private final int lockCount;
+    private PasswordEncryptType encryptType;
+    private String password;
+    private int lockCount;
 
     private Password(String password) {
         this.encryptType = PasswordEncryptType.BCRYPT;
@@ -44,7 +43,7 @@ public class Password {
         this.password = password;
         this.lockCount = lockCount;
     }
-
+    
     public static Password of(String password) {
         Password vo = new Password(password);
         validPassword(vo);

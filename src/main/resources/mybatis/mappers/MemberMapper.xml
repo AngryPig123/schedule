@@ -42,7 +42,7 @@
 
     </resultMap>
 
-    <select id="findMemberByMemberLoginId" resultMap="MemberResultMap">
+    <select id="findMemberByMemberLoginId" parameterType="MemberLoginId" resultMap="MemberResultMap">
         SELECT MEMBER_ID
              , MEMBER_LOGIN_ID
              , ENCRYPT_TYPE
@@ -104,5 +104,26 @@
                , #{lastModifiedBy}
                , now())
     </insert>
+
+    <update id="updateMember">
+        UPDATE MEMBER
+        SET MEMBER_LOGIN_ID    = #{memberLoginId.id}
+          , ENCRYPT_TYPE       = #{password.encryptType}
+          , PASSWORD           = #{password.password}
+          , LOCK_COUNT         = #{password.lockCount}
+          , FIRST_NAME         = #{name.firstName}
+          , LAST_NAME          = #{name.lastName}
+          , HOME_DORO_YN       = #{homeAddress.doroYn}
+          , HOME_JI_BUN_YN     = #{homeAddress.jiBunYn}
+          , HOME_ZIP_NO        = #{homeAddress.zipCode}
+          , HOME_ADDRESS       = #{homeAddress.address}
+          , HOME_ADDRESS_DETAIL= #{homeAddress.addressDetail}
+          , CELL_FIRST_NUMBER  = #{cellPhone.firstNumber}
+          , CELL_MIDDLE_NUMBER= #{cellPhone.middleNumber}
+          , CELL_LAST_NUMBER= #{cellPhone.lastNumber}
+          , LAST_MODIFIED_BY=#{lastModifiedBy}
+          , LAST_MODIFIED_AT= now()
+        WHERE MEMBER_LOGIN_ID = #{memberLoginId.id}
+    </update>
 
 </mapper>
