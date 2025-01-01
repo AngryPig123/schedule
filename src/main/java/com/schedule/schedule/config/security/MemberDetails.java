@@ -50,13 +50,18 @@ public class MemberDetails implements UserDetails {
         return member.getPassword().getPassword();
     }
 
-    public PasswordEncryptType getEncryptType(){
+    public PasswordEncryptType getEncryptType() {
         return member.getPassword().getEncryptType();
     }
 
     @Override
     public String getUsername() {
         return member.getName().fullName();
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return this.member.getPassword().getLockCount() < 5;
     }
 
     public Long getMemberId() {

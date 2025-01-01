@@ -50,7 +50,7 @@ public class SecurityConfig {
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         .anyRequest().authenticated()
                 )
-                .formLogin(withDefaults())
+                .formLogin(withDefaults());
 //                .formLogin(form -> form
 //                        .loginPage("/login")
 //                        .defaultSuccessUrl("/")
@@ -62,7 +62,7 @@ public class SecurityConfig {
 //                        .logoutSuccessUrl("/login")
 //                        .permitAll()
 //                )
-                .authenticationProvider(basicAuthenticationProvider);
+//                .authenticationProvider(basicAuthenticationProvider);
 
         return httpSecurity.build();
     }

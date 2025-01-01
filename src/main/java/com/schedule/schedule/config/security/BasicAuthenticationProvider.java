@@ -2,8 +2,6 @@ package com.schedule.schedule.config.security;
 
 import com.schedule.schedule.constants.PasswordEncryptType;
 import com.schedule.schedule.entity.Member;
-import com.schedule.schedule.entity.MemberDetail;
-import com.schedule.schedule.entity.id.MemberLoginId;
 import com.schedule.schedule.repository.MemberMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,7 +10,6 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
@@ -52,8 +49,14 @@ public class BasicAuthenticationProvider implements AuthenticationProvider {
         PasswordEncoder passwordEncoder = findPasswordEncoderByPasswordEncryptType(encryptType);
 
         if (!passwordEncoder.matches(rawPassword, password)) {
-            lockCountUpdate(user.getMember());
+            Member member = user.getMember();
+            member.increasePasswordLockCount();
+            memberMapper.updateMember(member);
             throw new BadCredentialsException("비밀번호가 맞지 않습니다.");
+        }
+
+        if (!user.isEnabled()) {
+            throw new BadCredentialsException("비밀번호를 5회 틀리셨습니다.");
         }
 
         return new UsernamePasswordAuthenticationToken(
@@ -62,12 +65,6 @@ public class BasicAuthenticationProvider implements AuthenticationProvider {
                 user.getAuthorities()
         );
 
-    }
-
-    @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = {Exception.class}, noRollbackFor = BadCredentialsException.class)
-    public void lockCountUpdate(Member member) {
-        member.increasePasswordLockCount();
-        memberMapper.updateMember(member);
     }
 
     @Override
