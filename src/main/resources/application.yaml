@@ -35,10 +35,6 @@ spring:
   h2:
     console:
       enabled: true
-  security:
-    user:
-      name: user
-      password: 1q2w3e4r!
 
 server:
   port: ${LOCAL_HOST:8080}

@@ -15,5 +15,7 @@ import com.schedule.schedule.entity.Member;
  * 24. 12. 24.        AngryPig123       최초 생성
  */
 public interface MemberService {
+
     Member insertMember(MemberInsertRequest memberInsertRequest);
+
 }

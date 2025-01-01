@@ -2,6 +2,7 @@ package com.schedule.schedule.constants;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.apache.ibatis.type.Alias;
 
 import java.util.Arrays;
 
@@ -16,6 +17,7 @@ import java.util.Arrays;
  * -----------------------------------------------------------
  * 24. 12. 22.        AngryPig123       최초 생성
  */
+@Alias("PasswordEncryptType")
 @Getter
 @AllArgsConstructor
 public enum PasswordEncryptType {

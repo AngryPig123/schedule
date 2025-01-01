@@ -20,12 +20,17 @@ import static com.schedule.schedule.validator.vo.VOValidator.isValidPhoneRegex;
 @Getter
 @ToString
 @EqualsAndHashCode
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Phone {
 
     private final String firstNumber;
     private final String middleNumber;
     private final String lastNumber;
+
+    private Phone(String firstNumber, String middleNumber, String lastNumber) {
+        this.firstNumber = firstNumber;
+        this.middleNumber = middleNumber;
+        this.lastNumber = lastNumber;
+    }
 
     public static Phone from(String first, String middle, String last) {
         Phone phone = new Phone(first, middle, last);
